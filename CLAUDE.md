@@ -1,6 +1,6 @@
 # Time to Kommit
 
-Countdown web app for **countdown.getkommit.ai**. Counts down to a configurable date with the Kommit brand identity.
+Countdown web app for **countdown.getkommit.ai** by the Kommit Team. Counts down to a configurable date with the Kommit brand identity.
 
 ## Stack
 
@@ -25,13 +25,15 @@ src/
 │   ├── page.tsx                # Countdown page (client component)
 │   ├── globals.css             # Design tokens, light/dark mode, animations
 │   ├── opengraph-image.tsx     # Dynamic OG image (edge, revalidates hourly)
-│   └── twitter-image.tsx       # Twitter card image (same as OG)
+│   └── twitter-image.tsx       # Twitter card image (edge)
 ├── components/
-│   ├── countdown-digit.tsx     # Single digit card with tick animation
+│   ├── animated-logo.tsx       # Pixelated K logo with staggered block reveal
+│   ├── countdown-digit.tsx     # Single digit card with tick animation + blue glow
 │   └── theme-toggle.tsx        # Light/dark mode toggle (top-left)
 └── hooks/
     ├── use-countdown.ts        # Countdown timer (1s interval)
     ├── use-greeting.ts         # Time-of-day greeting
+    ├── use-tab-title.ts        # Tab away title ("Still kommiting?")
     └── use-tagline.ts          # Rotating dev-humor taglines
 public/
 ├── icon.svg                    # Kommit logo (pixelated K on blue circle)
@@ -54,6 +56,7 @@ Based on the [Kommit design system](https://getkommit.ai/design-system).
 - **Brand color**: `#2563EB`
 - **Fonts**: Geist Sans (UI text), Geist Mono (digits, code, wordmark)
 - **Dark-first**: Design for dark mode first, verify in light
+- **Background layers**: Dot grid + radial blue vignette + noise grain texture
 
 ## Conventions
 
@@ -62,3 +65,5 @@ Based on the [Kommit design system](https://getkommit.ai/design-system).
 - Use `next/image` for images — remote patterns locked to `getkommit.ai` in `next.config.ts`
 - Keep dependencies minimal — no shadcn/ui or icon libraries needed for this app
 - Anti-patterns (from design system): no colored icon containers, no gradient accent lines on cards, max `rounded-lg` on cards, no `hover:scale` on cards, no hardcoded colors
+- Animations use CSS keyframes defined in `globals.css` — staggered via `animation-delay`
+- Page entrance uses orchestrated stagger sequence (logo → greeting → heading → countdown → tagline → footer)
