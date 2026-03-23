@@ -150,6 +150,57 @@ body {
   animation: fade-in-up 0.6s ease-out both;
 }
 
+/* ── Logo animations ── */
+@keyframes logo-circle {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes logo-block {
+  0% {
+    opacity: 0;
+    transform: translateY(4px) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── Letter reveal ── */
+@keyframes letter-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.letter-animate {
+  opacity: 0;
+  animation: letter-appear 0.3s ease-out both;
+}
+
+/* ── Heartbeat ── */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+  display: inline-block;
+}
+
 /* ── Tagline fade ── */
 .tagline-fade {
   transition: opacity 0.4s ease;

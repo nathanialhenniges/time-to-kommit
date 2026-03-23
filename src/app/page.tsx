@@ -1,15 +1,17 @@
 "use client";
 
-import Image from "next/image";
 import { useCountdown } from "@/hooks/use-countdown";
 import { useGreeting } from "@/hooks/use-greeting";
 import { useTagline } from "@/hooks/use-tagline";
 import { CountdownDigit } from "@/components/countdown-digit";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { AnimatedLogo } from "@/components/animated-logo";
 import { useTabTitle } from "@/hooks/use-tab-title";
 
 const COUNTDOWN_DATE =
   process.env.NEXT_PUBLIC_COUNTDOWN_DATE || "2026-04-01T13:00:00Z";
+
+const KOMMITED_LETTERS = "Kommited?".split("");
 
 export default function Home() {
   const { days, hours, minutes, seconds, isExpired } =
@@ -36,13 +38,13 @@ export default function Home() {
         }}
       />
 
-      <main className="relative z-10 min-h-dvh flex flex-col items-center justify-center gap-8 md:gap-12 px-6">
+      <main className="relative z-10 min-h-dvh flex flex-col items-center justify-center gap-8 md:gap-12 px-6 pb-16">
         {/* Logo + Wordmark */}
-        <div className="flex items-center gap-3 animate-fade-in-up">
-          <Image src="/icon.svg" alt="Kommit" width={36} height={36} />
+        <div className="flex items-center gap-3">
+          <AnimatedLogo size={36} />
           <span
-            className="font-[family-name:var(--font-geist-mono)] font-semibold text-lg tracking-[-0.02em]"
-            style={{ color: "var(--ds-text-primary)" }}
+            className="font-[family-name:var(--font-geist-mono)] font-semibold text-lg tracking-[-0.02em] animate-fade-in-up"
+            style={{ color: "var(--ds-text-primary)", animationDelay: "0.5s" }}
           >
             Kommit
           </span>
@@ -54,7 +56,7 @@ export default function Home() {
             className="text-sm animate-fade-in-up"
             style={{
               color: "var(--ds-text-secondary)",
-              animationDelay: "0.1s",
+              animationDelay: "0.8s",
             }}
           >
             {greeting}
@@ -63,20 +65,33 @@ export default function Home() {
 
         {/* Hero */}
         <h1
-          className="text-4xl md:text-6xl font-semibold text-center tracking-tight animate-fade-in-up leading-tight"
-          style={{ color: "var(--ds-text-primary)", animationDelay: "0.2s" }}
+          className="text-4xl md:text-6xl font-semibold text-center tracking-tight leading-tight"
+          style={{ color: "var(--ds-text-primary)" }}
         >
-          Are you ready to get
+          <span
+            className="animate-fade-in-up inline-block"
+            style={{ animationDelay: "0.9s" }}
+          >
+            Are you ready to get
+          </span>
           <br />
           <span
-            className="text-5xl md:text-7xl"
+            className="text-5xl md:text-7xl inline-block"
             style={{
               color: "var(--ds-primary)",
               textShadow:
                 "0 0 40px var(--ds-glow), 0 0 80px var(--ds-glow-strong)",
             }}
           >
-            Kommited?
+            {KOMMITED_LETTERS.map((letter, i) => (
+              <span
+                key={i}
+                className="letter-animate inline-block"
+                style={{ animationDelay: `${1.0 + i * 0.05}s` }}
+              >
+                {letter}
+              </span>
+            ))}
           </span>
         </h1>
 
@@ -84,7 +99,7 @@ export default function Home() {
         {isExpired ? (
           <div
             className="flex flex-col items-center gap-4 animate-fade-in-up"
-            style={{ animationDelay: "0.3s" }}
+            style={{ animationDelay: "1.6s" }}
           >
             <p
               className="font-[family-name:var(--font-geist-mono)] text-5xl md:text-7xl font-semibold glow-pulse"
@@ -96,7 +111,7 @@ export default function Home() {
         ) : (
           <div
             className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 animate-fade-in-up"
-            style={{ animationDelay: "0.3s" }}
+            style={{ animationDelay: "1.6s" }}
           >
             <CountdownDigit value={days} label="Days" />
             <CountdownDigit value={hours} label="Hours" />
@@ -110,11 +125,48 @@ export default function Home() {
           className={`font-[family-name:var(--font-geist-mono)] text-xs md:text-sm animate-fade-in-up tagline-fade ${taglineVisible ? "tagline-fade-visible" : "tagline-fade-hidden"}`}
           style={{
             color: "var(--ds-text-muted)",
-            animationDelay: "0.4s",
+            animationDelay: "1.8s",
           }}
         >
           {isExpired ? "No more excuses. Ship it." : tagline}
         </p>
+
+        {/* Footer badge */}
+        <div
+          className="animate-fade-in-up mt-4"
+          style={{ animationDelay: "2.0s" }}
+        >
+          <div
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs"
+            style={{
+              backgroundColor: "var(--ds-surface-card)",
+              border: "1px solid var(--ds-border-subtle)",
+              color: "var(--ds-text-muted)",
+              boxShadow: "var(--ds-shadow-sm)",
+            }}
+          >
+            Made with{" "}
+            <span className="animate-heartbeat" style={{ color: "#EF4444" }}>
+              ❤️
+            </span>{" "}
+            by the{" "}
+            <a
+              href="https://getkommit.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors duration-200"
+              style={{ color: "var(--ds-text-secondary)" }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "var(--ds-primary)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "var(--ds-text-secondary)")
+              }
+            >
+              Kommit Team
+            </a>
+          </div>
+        </div>
       </main>
 
       {/* Bottom accent line */}
