@@ -6,6 +6,7 @@ import { useGreeting } from "@/hooks/use-greeting";
 import { useTagline } from "@/hooks/use-tagline";
 import { CountdownDigit } from "@/components/countdown-digit";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useTabTitle } from "@/hooks/use-tab-title";
 
 const COUNTDOWN_DATE =
   process.env.NEXT_PUBLIC_COUNTDOWN_DATE || "2026-04-01T13:00:00Z";
@@ -14,6 +15,7 @@ export default function Home() {
   const { days, hours, minutes, seconds, isExpired } =
     useCountdown(COUNTDOWN_DATE);
   const greeting = useGreeting();
+  useTabTitle();
   const { text: tagline, visible: taglineVisible } = useTagline();
 
   return (
