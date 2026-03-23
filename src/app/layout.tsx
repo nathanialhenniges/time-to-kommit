@@ -13,10 +13,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Time to Kommit",
-  description: "The clock is ticking. Are you ready to get Kommited?",
+  title: "Time to Kommit | Are you ready?",
+  description:
+    "The countdown is on. Are you ready to get Kommited? Something big is shipping soon.",
+  metadataBase: new URL("https://countdown.getkommit.ai"),
+  keywords: ["kommit", "countdown", "launch", "developer tools", "shipping"],
+  authors: [{ name: "Kommit" }],
+  creator: "Kommit",
+  openGraph: {
+    title: "Are you ready to get Kommited?",
+    description: "The countdown is on. Something big is shipping soon.",
+    siteName: "Time to Kommit",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Are you ready to get Kommited?",
+    description: "The countdown is on. Something big is shipping soon.",
+    creator: "@getkommit",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: "/icon.svg",
+    apple: "/icon.png",
   },
 };
 
