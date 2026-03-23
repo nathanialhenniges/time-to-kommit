@@ -27,6 +27,7 @@ export default function Home() {
       {/* Background layers */}
       <div className="fixed inset-0 bg-dot-grid pointer-events-none" />
       <div className="fixed inset-0 bg-vignette pointer-events-none" />
+      <div className="fixed inset-0 bg-noise pointer-events-none" />
 
       {/* Top accent line */}
       <div
@@ -38,22 +39,16 @@ export default function Home() {
         }}
       />
 
-      <main className="relative z-10 min-h-dvh flex flex-col items-center justify-center gap-8 md:gap-12 px-6 pb-16">
-        {/* Logo + Wordmark */}
-        <div className="flex items-center gap-3">
-          <AnimatedLogo size={36} />
-          <span
-            className="font-[family-name:var(--font-geist-mono)] font-semibold text-lg tracking-[-0.02em] animate-fade-in-up"
-            style={{ color: "var(--ds-text-primary)", animationDelay: "0.5s" }}
-          >
-            Kommit
-          </span>
+      <main className="relative z-10 min-h-dvh flex flex-col items-center justify-center gap-6 md:gap-10 px-6 pb-16">
+        {/* Big Logo */}
+        <div className="animate-fade-in-up" style={{ animationDelay: "0s" }}>
+          <AnimatedLogo size={80} />
         </div>
 
         {/* Greeting */}
         {greeting && (
           <p
-            className="text-sm animate-fade-in-up"
+            className="text-sm animate-fade-in-up -mb-4"
             style={{
               color: "var(--ds-text-secondary)",
               animationDelay: "0.8s",
@@ -63,20 +58,19 @@ export default function Home() {
           </p>
         )}
 
-        {/* Hero */}
+        {/* Hero — single heading */}
         <h1
-          className="text-4xl md:text-6xl font-semibold text-center tracking-tight leading-tight"
+          className="text-3xl md:text-5xl font-semibold text-center tracking-tight leading-tight"
           style={{ color: "var(--ds-text-primary)" }}
         >
           <span
             className="animate-fade-in-up inline-block"
             style={{ animationDelay: "0.9s" }}
           >
-            Are you ready to get
+            Are you ready to get{" "}
           </span>
-          <br />
           <span
-            className="text-5xl md:text-7xl inline-block"
+            className="text-4xl md:text-6xl inline-block"
             style={{
               color: "var(--ds-primary)",
               textShadow:
@@ -110,12 +104,30 @@ export default function Home() {
           </div>
         ) : (
           <div
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 animate-fade-in-up"
+            className="flex items-center gap-2 md:gap-4 animate-fade-in-up"
             style={{ animationDelay: "1.6s" }}
           >
             <CountdownDigit value={days} label="Days" />
+            <span
+              className="hidden md:block text-3xl font-semibold self-start mt-8"
+              style={{ color: "var(--ds-text-muted)" }}
+            >
+              :
+            </span>
             <CountdownDigit value={hours} label="Hours" />
+            <span
+              className="hidden md:block text-3xl font-semibold self-start mt-8"
+              style={{ color: "var(--ds-text-muted)" }}
+            >
+              :
+            </span>
             <CountdownDigit value={minutes} label="Minutes" />
+            <span
+              className="hidden md:block text-3xl font-semibold self-start mt-8"
+              style={{ color: "var(--ds-text-muted)" }}
+            >
+              :
+            </span>
             <CountdownDigit value={seconds} label="Seconds" />
           </div>
         )}
